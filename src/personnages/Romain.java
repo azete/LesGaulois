@@ -13,9 +13,11 @@ public class Romain {
 		this.nom = nom;
 		this.force = force;
 	}
+
 	public int getForce() {
 		return force;
 	}
+
 	public String getNom() {
 		return nom;
 	}
@@ -86,12 +88,12 @@ public class Romain {
 			break;
 		}
 		// post condition la force a diminuée
-		assert force < oldForce;
+		assert force <= oldForce;
 		return equipementEjecte;
 	}
 
 	private int CalculResistanceEquipement(int forceCoup) {
-		texte = "Ma force est de " + this.force + ", et la force ducoup est de " + forceCoup;
+		texte = "Ma force est de " + this.force + " , et la force du coup est de " + forceCoup;
 		int resistanceEquipement = 0;
 		if (!(nbEquipement == 0)) {
 			texte += "\nMais heureusement, grace à mon équipement sa force est diminué de ";
@@ -108,11 +110,10 @@ public class Romain {
 		}
 		parler(texte);
 		forceCoup -= resistanceEquipement;
-		if (forceCoup < 0) {
-			forceCoup=0;
+		if (forceCoup <= 0) {
+			return force;
+		} else {
 			return forceCoup;
-		}else {
-		return forceCoup;
 		}
 	}
 
@@ -136,7 +137,7 @@ public class Romain {
 		Romain Minus = new Romain("Minus", 6);
 		Minus.parler("blabla");
 		Minus.recevoirCoup(8);
-		System.out.println(Equipement.Bouclier.toString() + Equipement.Casque.toString());
+		System.out.println(Equipement.Bouclier.toString() + " " +  Equipement.Casque.toString());
 		Minus.sEquiper(Equipement.Casque);
 		Minus.sEquiper(Equipement.Casque);
 		Minus.sEquiper(Equipement.Bouclier);
