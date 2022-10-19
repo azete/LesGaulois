@@ -5,13 +5,12 @@ public class Romain {
 	private int force, nb_trophees;
 	private int effetPotion = 1;
 	private int nbEquipement = 0;
-	Equipement[] equipements;
+	private Equipement[] equipements= new Equipement[2];
 	private Equipement trophees[] = new Equipement[100];
 
 	public Romain(String nom, int force) {
 		this.nom = nom;
 		this.force = force;
-		equipements = new Equipement[2];
 	}
 
 	public String getNom() {
@@ -38,24 +37,36 @@ public class Romain {
 		assert oldforce > force;
 	}
 
-	public void sEquiper(int nbEquipement) {
-		if (nbEquipement > 2) {
-			System.out.print("Le soldat " + nom + " est deja bien protégé !");
-		} else if (Equipements[nbEquipement] == Equipement.Bouclier) {
-			System.out.print("Le soldat " + nom + " possède deja un bouclier !");
-		} else if (Equipements[nbEquipement] == Equipement.Casque) {
-			System.out.print("Le soldat " + nom + " possède deja un casque !");
-		} else {
-			this.equipements[nbEquipement] = Equipement;
-			nbEquipement++;
-			System.out.print("Le soldat " + nom + " s'équipe d'un " + Equipement);
+	public void sEquiper(Equipement equip) {
+		switch (nbEquipement) {
+		case 2 :
+			System.out.println(" Le soldat " + nom + "  est déjà bien protégé !");
+			break;
+		case 0 :
+			setEquiper(equip);
+			break;
+		case 1:
+			if ((equipements[0]).toString()== equip.toString()) {
+				System.out.println(" Le soldat " + nom + "  possède deja un "+ equip.toString()+ " !");
+			}
+			else {
+				setEquiper(equip);
+			}break;
 		}
 	}
-
+	public void setEquiper(Equipement equip) {
+		this.equipements [nbEquipement]= equip;
+		this.nbEquipement++;
+		System.out.println(" Le soldat " + nom + "  s'équipe d'un " +  equip.toString() +" .");
+	}
 	public static void main(String[] args) {
 		Romain Minus = new Romain("Minus", 6);
 		Minus.parler("blabla");
 		Minus.recevoirCoup(8);
-		System.out.println(Equipement.Bouclier, Equipement.Casque);
+		System.out.println(Equipement.Bouclier.toString() + Equipement.Casque.toString());
+		Minus.sEquiper(Equipement.Casque);
+		Minus.sEquiper(Equipement.Casque);
+		Minus.sEquiper(Equipement.Bouclier);
+		Minus.sEquiper(Equipement.Casque);
 	}
 }
